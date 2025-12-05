@@ -16,7 +16,7 @@ function listImages() {
   const exts = new Set(['.jpg', '.jpeg', '.png', '.webp', '.gif', '.svg']);
   return fs.readdirSync(dir)
     .filter((f) => exts.has(path.extname(f).toLowerCase()))
-    .map((f) => `/images/${f}`);
+    .map((f) => `/${f}`);
 }
 
 async function main() {
