@@ -3,7 +3,7 @@ import { listProducts } from '../lib/api.js';
 import { Link } from 'react-router-dom';
 
 export function MenPage() {
-  const { data, isLoading } = useQuery({ queryKey: ['men'], queryFn: () => listProducts({ page: 1, pageSize: 24 }) });
+  const { data, isLoading } = useQuery({ queryKey: ['men'], queryFn: () => listProducts({ excludeCategory: 'Women', page: 1, pageSize: 24 }) });
   return (
     <div className="space-y-6">
       <div className="space-y-1">
