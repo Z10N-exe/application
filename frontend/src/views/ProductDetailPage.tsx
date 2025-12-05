@@ -26,6 +26,11 @@ export function ProductDetailPage() {
 
   return (
     <div className="space-y-12 pb-24 md:pb-0">
+      <div>
+        <Link to="/products" className="inline-flex items-center gap-2 text-sm underline">
+          ← Back to Products
+        </Link>
+      </div>
       <div className="grid md:grid-cols-2 gap-8">
         <div className="grid grid-cols-[80px_1fr] gap-4">
           <div className="flex md:flex-col gap-2 overflow-auto">
