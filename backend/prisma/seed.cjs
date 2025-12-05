@@ -59,7 +59,7 @@ async function main() {
         category,
         brand: 'Nike',
         rating: Math.round((Math.random() * 5) * 10) / 10,
-        stock: rand(5, 50),
+        stock: Math.random() < 0.25 ? 0 : rand(5, 50),
         images: {
           create: [{ url: img }],
         },
