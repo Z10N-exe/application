@@ -1,3 +1,4 @@
+"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -7,10 +8,15 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { UsersService } from '../users/users.service';
-import { JwtService } from '@nestjs/jwt';
-import bcrypt from 'bcrypt';
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.AuthService = void 0;
+const common_1 = require("@nestjs/common");
+const users_service_1 = require("../users/users.service");
+const jwt_1 = require("@nestjs/jwt");
+const bcrypt_1 = __importDefault(require("bcrypt"));
 let AuthService = class AuthService {
     constructor(users, jwt) {
         this.users = users;
@@ -24,10 +30,10 @@ let AuthService = class AuthService {
     async login(data) {
         const existing = await this.users.findByEmail(data.email);
         if (!existing)
-            throw new UnauthorizedException('Invalid credentials');
-        const ok = await bcrypt.compare(data.password, existing.passwordHash);
+            throw new common_1.UnauthorizedException('Invalid credentials');
+        const ok = await bcrypt_1.default.compare(data.password, existing.passwordHash);
         if (!ok)
-            throw new UnauthorizedException('Invalid credentials');
+            throw new common_1.UnauthorizedException('Invalid credentials');
         const token = await this.jwt.signAsync({ sub: existing.id, email: existing.email });
         return {
             user: { id: existing.id, name: existing.name, email: existing.email, createdAt: existing.createdAt },
@@ -35,9 +41,9 @@ let AuthService = class AuthService {
         };
     }
 };
-AuthService = __decorate([
-    Injectable(),
-    __metadata("design:paramtypes", [UsersService, JwtService])
+exports.AuthService = AuthService;
+exports.AuthService = AuthService = __decorate([
+    (0, common_1.Injectable)(),
+    __metadata("design:paramtypes", [users_service_1.UsersService, jwt_1.JwtService])
 ], AuthService);
-export { AuthService };
 //# sourceMappingURL=auth.service.js.map

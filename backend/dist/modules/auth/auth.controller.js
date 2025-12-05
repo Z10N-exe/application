@@ -1,3 +1,4 @@
+"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -10,34 +11,36 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
-import { Body, Controller, Post } from '@nestjs/common';
-import { AuthService } from './auth.service';
-import { IsEmail, IsString, MinLength } from 'class-validator';
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.AuthController = void 0;
+const common_1 = require("@nestjs/common");
+const auth_service_1 = require("./auth.service");
+const class_validator_1 = require("class-validator");
 class SignupDto {
 }
 __decorate([
-    IsString(),
-    MinLength(2),
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.MinLength)(2),
     __metadata("design:type", String)
 ], SignupDto.prototype, "name", void 0);
 __decorate([
-    IsEmail(),
+    (0, class_validator_1.IsEmail)(),
     __metadata("design:type", String)
 ], SignupDto.prototype, "email", void 0);
 __decorate([
-    IsString(),
-    MinLength(8),
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.MinLength)(8),
     __metadata("design:type", String)
 ], SignupDto.prototype, "password", void 0);
 class LoginDto {
 }
 __decorate([
-    IsEmail(),
+    (0, class_validator_1.IsEmail)(),
     __metadata("design:type", String)
 ], LoginDto.prototype, "email", void 0);
 __decorate([
-    IsString(),
-    MinLength(8),
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.MinLength)(8),
     __metadata("design:type", String)
 ], LoginDto.prototype, "password", void 0);
 let AuthController = class AuthController {
@@ -51,23 +54,23 @@ let AuthController = class AuthController {
         return this.auth.login(dto);
     }
 };
+exports.AuthController = AuthController;
 __decorate([
-    Post('signup'),
-    __param(0, Body()),
+    (0, common_1.Post)('signup'),
+    __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [SignupDto]),
     __metadata("design:returntype", void 0)
 ], AuthController.prototype, "signup", null);
 __decorate([
-    Post('login'),
-    __param(0, Body()),
+    (0, common_1.Post)('login'),
+    __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [LoginDto]),
     __metadata("design:returntype", void 0)
 ], AuthController.prototype, "login", null);
-AuthController = __decorate([
-    Controller('auth'),
-    __metadata("design:paramtypes", [AuthService])
+exports.AuthController = AuthController = __decorate([
+    (0, common_1.Controller)('auth'),
+    __metadata("design:paramtypes", [auth_service_1.AuthService])
 ], AuthController);
-export { AuthController };
 //# sourceMappingURL=auth.controller.js.map

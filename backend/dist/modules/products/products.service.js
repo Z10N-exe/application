@@ -1,3 +1,4 @@
+"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -7,19 +8,28 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Injectable } from '@nestjs/common';
-import { PrismaService } from '../../prisma/prisma.service';
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ProductsService = void 0;
+const common_1 = require("@nestjs/common");
+const prisma_service_1 = require("../../prisma/prisma.service");
 let ProductsService = class ProductsService {
     constructor(prisma) {
         this.prisma = prisma;
     }
     async list(filters) {
-        const { search, category, brand, minPrice, maxPrice, minRating, inStock, page = 1, pageSize = 12, } = filters;
+        const { search, category, excludeCategory, brand, minPrice, maxPrice, minRating, inStock, page = 1, pageSize = 12, } = filters;
         const where = {};
         if (search)
-            where.OR = [{ name: { contains: search, mode: 'insensitive' } }, { description: { contains: search, mode: 'insensitive' } }];
+            where.OR = [
+                { name: { contains: search } },
+                { description: { contains: search } },
+                { brand: { contains: search } },
+                { category: { contains: search } },
+            ];
         if (category)
             where.category = category;
+        if (excludeCategory)
+            where.NOT = [{ category: excludeCategory }];
         if (brand)
             where.brand = brand;
         if (typeof minPrice === 'number' || typeof maxPrice === 'number')
@@ -42,15 +52,24 @@ let ProductsService = class ProductsService {
                 include: { images: true },
             }),
         ]);
-        return { total, page, pageSize, items };
+        const randomized = search ? shuffle(items) : items;
+        return { total, page, pageSize, items: randomized };
     }
     async getById(id) {
         return this.prisma.product.findUnique({ where: { id }, include: { images: true } });
     }
 };
-ProductsService = __decorate([
-    Injectable(),
-    __metadata("design:paramtypes", [PrismaService])
+exports.ProductsService = ProductsService;
+exports.ProductsService = ProductsService = __decorate([
+    (0, common_1.Injectable)(),
+    __metadata("design:paramtypes", [prisma_service_1.PrismaService])
 ], ProductsService);
-export { ProductsService };
+function shuffle(arr) {
+    const a = [...arr];
+    for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+}
 //# sourceMappingURL=products.service.js.map
