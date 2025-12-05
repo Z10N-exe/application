@@ -21,7 +21,7 @@ export async function signup(payload: { name: string; email: string; password: s
 }
 
 export async function signin(payload: { email: string; password: string }) {
-  const { data } = await api.post('/auth/signin', payload);
+  const { data } = await api.post('/auth/login', payload);
   return data as { user: { id: number; name: string; email: string }; token: string };
 }
 
