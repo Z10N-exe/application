@@ -32,10 +32,10 @@ export class ProductsService {
 
     const where: any = {};
     if (search) where.OR = [
-      { name: { contains: search, mode: 'insensitive' } },
-      { description: { contains: search, mode: 'insensitive' } },
-      { brand: { contains: search, mode: 'insensitive' } },
-      { category: { contains: search, mode: 'insensitive' } },
+      { name: { contains: search } },
+      { description: { contains: search } },
+      { brand: { contains: search } },
+      { category: { contains: search } },
     ];
     if (category) where.category = category;
     if (brand) where.brand = brand;
