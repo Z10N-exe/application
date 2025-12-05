@@ -25,7 +25,7 @@ export function ProductDetailPage() {
   const mainImage = product.images?.[selected]?.url ?? product.images?.[0]?.url;
 
   return (
-    <div className="space-y-12">
+    <div className="space-y-12 pb-24 md:pb-0">
       <div className="grid md:grid-cols-2 gap-8">
         <div className="grid grid-cols-[80px_1fr] gap-4">
           <div className="flex md:flex-col gap-2 overflow-auto">
@@ -61,8 +61,8 @@ export function ProductDetailPage() {
             </div>
           </div>
           <div className={product.stock > 0 ? 'text-green-600' : 'text-red-600'}>{product.stock > 0 ? 'In Stock' : 'Out of Stock'}</div>
-          <div className="flex gap-3">
-            <button className="w-full rounded-full px-5 py-3 bg-black text-white disabled:opacity-50" disabled={product.stock === 0} onClick={() => addItem({ id: product.id })}>Add to Bag</button>
+          <div className="hidden md:flex gap-3">
+            <button className="rounded-full px-5 py-3 bg-black text-white disabled:opacity-50" disabled={product.stock === 0} onClick={() => addItem({ id: product.id })}>Add to Bag</button>
           </div>
           <div className="divide-y border rounded">
             <details className="p-4" open>
@@ -96,6 +96,12 @@ export function ProductDetailPage() {
               <div className="text-sm">${p.price.toFixed(2)}</div>
             </Link>
           ))}
+        </div>
+      </div>
+      <div className="fixed md:hidden bottom-0 left-0 right-0 border-t bg-white px-4 py-3">
+        <div className="flex items-center gap-3">
+          <div className="font-semibold">${product.price.toFixed(2)}</div>
+          <button className="flex-1 rounded-full px-5 py-3 bg-black text-white disabled:opacity-50" disabled={product.stock === 0} onClick={() => addItem({ id: product.id })}>Add to Bag</button>
         </div>
       </div>
     </div>
