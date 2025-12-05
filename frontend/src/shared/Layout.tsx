@@ -6,6 +6,7 @@ export function Layout() {
   const { cartCount } = useCart();
   const { pathname } = useLocation();
   const isAuthPage = pathname === '/signup' || pathname === '/signin';
+  const isProductDetail = pathname.startsWith('/products/') && pathname !== '/products';
   return (
     <div className="min-h-screen bg-white text-black">
       {!isAuthPage && (
@@ -15,11 +16,11 @@ export function Layout() {
           </NavLink>
           {authed ? (
             <nav className="hidden md:flex items-center gap-6">
-              <NavLink to={{ pathname: '/products', search: '?category=Men' }} className={({isActive}) => isActive ? 'font-semibold' : ''}>Men</NavLink>
-              <NavLink to={{ pathname: '/products', search: '?category=Women' }} className={({isActive}) => isActive ? 'font-semibold' : ''}>Women</NavLink>
-              <NavLink to={{ pathname: '/products', search: '?category=Kids' }} className={({isActive}) => isActive ? 'font-semibold' : ''}>Kids</NavLink>
-              <NavLink to="/products" className={({isActive}) => isActive ? 'font-semibold' : ''}>Collections</NavLink>
-              <NavLink to="/products" className={({isActive}) => isActive ? 'font-semibold' : ''}>Contact</NavLink>
+              <NavLink to="/men" className={({isActive}) => isActive ? 'font-semibold' : ''}>Men</NavLink>
+              <NavLink to="/women" className={({isActive}) => isActive ? 'font-semibold' : ''}>Women</NavLink>
+              <NavLink to="/kids" className={({isActive}) => isActive ? 'font-semibold' : ''}>Kids</NavLink>
+              <NavLink to="/collections" className={({isActive}) => isActive ? 'font-semibold' : ''}>Collections</NavLink>
+              <NavLink to="/contact" className={({isActive}) => isActive ? 'font-semibold' : ''}>Contact</NavLink>
             </nav>
           ) : (
             <nav className="flex items-center gap-4">
@@ -29,8 +30,8 @@ export function Layout() {
             </nav>
           )}
           <div className="flex items-center gap-6">
-            <NavLink to="/products">Search</NavLink>
-            <NavLink to="/products">My Cart ({cartCount})</NavLink>
+            {isProductDetail && <NavLink to="/products">Search</NavLink>}
+            <NavLink to="/cart">My Cart ({cartCount})</NavLink>
           </div>
         </header>
       )}
