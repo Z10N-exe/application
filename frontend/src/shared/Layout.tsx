@@ -10,7 +10,7 @@ export function Layout() {
   return (
     <div className="min-h-screen bg-white text-black">
       {!isAuthPage && (
-        <header className="flex items-center justify-between px-6 py-4 border-b">
+        <header className="flex items-center justify-between px-4 md:px-6 py-3 md:py-4 border-b">
           <NavLink to="/products" className="flex items-center gap-2">
             <img src="/nike.jpg" alt="Logo" className="h-5 w-auto" />
           </NavLink>
@@ -30,12 +30,12 @@ export function Layout() {
             </nav>
           )}
           <div className="flex items-center gap-6">
-            {isProductDetail && <NavLink to="/products">Search</NavLink>}
+            <NavLink to="/products">Search</NavLink>
             <NavLink to="/cart">My Cart ({cartCount})</NavLink>
           </div>
         </header>
       )}
-      <main className="p-6">
+      <main className="p-4 md:p-6">
         <Outlet />
       </main>
     </div>

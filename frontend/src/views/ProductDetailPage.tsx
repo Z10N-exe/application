@@ -50,8 +50,11 @@ export function ProductDetailPage() {
             </button>
           </div>
           <div className="space-y-2">
-            <div className="font-semibold">Select Size</div>
-            <div className="grid grid-cols-6 gap-2">
+            <div className="flex items-center justify-between">
+              <div className="font-semibold">Select Size</div>
+              <button className="text-sm underline" type="button">Size Guide</button>
+            </div>
+            <div className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-6 gap-2">
               {sizes.map(s => (
                 <button key={s} type="button" onClick={() => setSize(s)} className={`border rounded px-3 py-2 text-sm ${size === s ? 'ring-2 ring-black' : ''}`}>{s}</button>
               ))}
@@ -59,8 +62,7 @@ export function ProductDetailPage() {
           </div>
           <div className={product.stock > 0 ? 'text-green-600' : 'text-red-600'}>{product.stock > 0 ? 'In Stock' : 'Out of Stock'}</div>
           <div className="flex gap-3">
-            <button className="rounded-full px-5 py-3 bg-black text-white disabled:opacity-50" disabled={product.stock === 0} onClick={() => addItem({ id: product.id })}>Add to Bag</button>
-            <button className="rounded-full px-5 py-3 border">Size Guide</button>
+            <button className="w-full rounded-full px-5 py-3 bg-black text-white disabled:opacity-50" disabled={product.stock === 0} onClick={() => addItem({ id: product.id })}>Add to Bag</button>
           </div>
           <div className="divide-y border rounded">
             <details className="p-4" open>
