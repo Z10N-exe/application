@@ -27,14 +27,36 @@ async function main() {
   await prisma.productImage.deleteMany();
   await prisma.product.deleteMany();
 
+  const names = [
+    'Nike Air Max 90',
+    'Nike Air Force 1',
+    'Nike Dunk Low',
+    'Nike Air Zoom Pegasus',
+    'Nike Blazer Mid',
+    'Nike Vaporfly 3',
+    'Nike React Infinity Run',
+    'Nike Air Zoom Alphafly',
+    'Nike LeBron',
+    'Nike Zoom Freak',
+    'Nike Metcon',
+    'Nike Jordan 1',
+    'Nike Cortez',
+    'Nike SB Dunk',
+    'Nike Air Huarache',
+    'Nike Free RN'
+  ];
+  const categories = ['Running', 'Lifestyle', 'Basketball', 'Training'];
+
   for (let i = 0; i < images.length; i++) {
     const img = images[i];
+    const name = names[i % names.length] + ` SE ${i + 1}`;
+    const category = categories[i % categories.length];
     await prisma.product.create({
       data: {
-        name: `Nike Shoes ${i + 1}`,
-        description: `Premium Nike shoes designed for comfort and performance. Model ${i + 1}.`,
+        name,
+        description: `${name} engineered for comfort and performance across ${category.toLowerCase()} sessions.`,
         price: rand(80, 220),
-        category: 'Shoes',
+        category,
         brand: 'Nike',
         rating: Math.round((Math.random() * 5) * 10) / 10,
         stock: rand(5, 50),

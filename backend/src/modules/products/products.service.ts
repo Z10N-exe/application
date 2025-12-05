@@ -31,7 +31,12 @@ export class ProductsService {
     } = filters;
 
     const where: any = {};
-    if (search) where.OR = [{ name: { contains: search, mode: 'insensitive' } }, { description: { contains: search, mode: 'insensitive' } }];
+    if (search) where.OR = [
+      { name: { contains: search, mode: 'insensitive' } },
+      { description: { contains: search, mode: 'insensitive' } },
+      { brand: { contains: search, mode: 'insensitive' } },
+      { category: { contains: search, mode: 'insensitive' } },
+    ];
     if (category) where.category = category;
     if (brand) where.brand = brand;
     if (typeof minPrice === 'number' || typeof maxPrice === 'number') where.price = {};
