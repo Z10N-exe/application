@@ -63,7 +63,7 @@ export function SignUpPage() {
             ))}
           </div>
         </div>
-        <div className="text-xs text-neutral-500 mt-8">© 2024 Nike. All rights reserved.</div>
+        <div className="text-xs text-neutral-500 mt-8">© 2025 Nike. All rights reserved.</div>
       </div>
       <div className="p-8 md:p-12 space-y-6">
         <div className="text-right text-sm">Already have an account? <Link to="/signin" className="underline">Sign In</Link></div>

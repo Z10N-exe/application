@@ -40,7 +40,7 @@ export function SignInPage() {
           <div className="text-3xl md:text-4xl font-bold">Welcome Back</div>
           <p className="text-neutral-300">Access your account and keep your training on track.</p>
         </div>
-        <div className="text-xs text-neutral-500 mt-8">© 2024 Nike. All rights reserved.</div>
+        <div className="text-xs text-neutral-500 mt-8">© 2025 Nike. All rights reserved.</div>
       </div>
       <div className="p-8 md:p-12 space-y-6">
         <div className="space-y-1">
