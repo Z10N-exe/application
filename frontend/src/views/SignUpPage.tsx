@@ -6,7 +6,7 @@ import { Button } from '../components/ui/button.js';
 import { signup } from '../lib/api.js';
 import { useNavigate, Link } from 'react-router-dom';
 import { Apple, Eye, EyeOff, ShieldCheck } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const schema = z.object({
   name: z.string().min(2, 'Enter your full name'),
@@ -20,6 +20,17 @@ export function SignUpPage() {
   const navigate = useNavigate();
   const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<FormValues>({ resolver: zodResolver(schema) });
   const [showPassword, setShowPassword] = useState(false);
+  const slides = [
+    { title: 'Just Do It', desc: 'Join millions of athletes and fitness enthusiasts who trust Nike for their performance needs.' },
+    { title: 'Train Smart', desc: 'Personalized gear for every goal with performance-driven design.' },
+    { title: 'Move Better', desc: 'Comfort and durability engineered for everyday and elite training.' },
+  ];
+  const [active, setActive] = useState(0);
+
+  useEffect(() => {
+    const id = setTimeout(() => setActive((i) => (i + 1) % slides.length), 6000);
+    return () => clearTimeout(id);
+  }, [active]);
 
   async function onSubmit(values: FormValues) {
     try {
@@ -35,17 +46,27 @@ export function SignUpPage() {
     <div className="grid md:grid-cols-2 rounded-2xl overflow-hidden border bg-white">
       <div className="bg-black text-white p-10 flex flex-col justify-between min-h-[50vh] md:min-h-[80vh]">
         <div className="flex items-center justify-start">
-          <div className="w-9 h-9 rounded-xl bg-white/90" />
+          <img src="/nike.webp" alt="Logo" className="h-9 object-contain" />
         </div>
         <div className="space-y-4">
-          <div className="text-3xl md:text-4xl font-bold">Just Do It</div>
-          <p className="text-neutral-300">Join millions of athletes and fitness enthusiasts who trust Nike for their performance needs.</p>
-          <div className="flex gap-2"> <span className="w-2 h-2 bg-white rounded-full"/> <span className="w-2 h-2 bg-neutral-500 rounded-full"/> <span className="w-2 h-2 bg-neutral-500 rounded-full"/> </div>
+          <div className="text-3xl md:text-4xl font-bold">{slides[active].title}</div>
+          <p className="text-neutral-300">{slides[active].desc}</p>
+          <div className="flex gap-2">
+            {slides.map((_, idx) => (
+              <button
+                key={idx}
+                type="button"
+                className={idx === active ? 'w-2 h-2 bg-white rounded-full' : 'w-2 h-2 bg-neutral-500 rounded-full'}
+                onClick={() => setActive(idx)}
+                aria-label={`Go to slide ${idx + 1}`}
+              />
+            ))}
+          </div>
         </div>
         <div className="text-xs text-neutral-500 mt-8">© 2024 Nike. All rights reserved.</div>
       </div>
       <div className="p-8 md:p-12 space-y-6">
-        <div className="text-right text-sm">Already have an account? <Link to="#" className="underline">Sign In</Link></div>
+        <div className="text-right text-sm">Already have an account? <Link to="/signin" className="underline">Sign In</Link></div>
         <div className="space-y-1">
           <h1 className="text-2xl md:text-3xl font-bold">Join Nike Today!</h1>
           <p className="text-sm text-neutral-600">Create your account to start your fitness journey</p>
