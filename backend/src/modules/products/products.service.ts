@@ -4,6 +4,7 @@ import { PrismaService } from '../../prisma/prisma.service';
 export interface ProductFilters {
   search?: string;
   category?: string;
+  excludeCategory?: string;
   brand?: string;
   minPrice?: number;
   maxPrice?: number;
@@ -21,6 +22,7 @@ export class ProductsService {
     const {
       search,
       category,
+      excludeCategory,
       brand,
       minPrice,
       maxPrice,
@@ -38,6 +40,7 @@ export class ProductsService {
       { category: { contains: search } },
     ];
     if (category) where.category = category;
+    if (excludeCategory) where.NOT = [{ category: excludeCategory }];
     if (brand) where.brand = brand;
     if (typeof minPrice === 'number' || typeof maxPrice === 'number') where.price = {};
     if (typeof minPrice === 'number') where.price.gte = minPrice;
@@ -56,10 +59,20 @@ export class ProductsService {
       }),
     ]);
 
-    return { total, page, pageSize, items };
+    const randomized = search ? shuffle(items) : items;
+    return { total, page, pageSize, items: randomized };
   }
 
   async getById(id: number) {
     return this.prisma.product.findUnique({ where: { id }, include: { images: true } });
   }
+}
+
+function shuffle<T>(arr: T[]) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
 }

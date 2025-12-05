@@ -9,6 +9,7 @@ export class ProductsController {
   list(
     @Query('search') search?: string,
     @Query('category') category?: string,
+    @Query('excludeCategory') excludeCategory?: string,
     @Query('brand') brand?: string,
     @Query('minPrice') minPrice?: string,
     @Query('maxPrice') maxPrice?: string,
@@ -20,6 +21,7 @@ export class ProductsController {
     return this.products.list({
       search,
       category,
+      excludeCategory,
       brand,
       minPrice: minPrice ? Number(minPrice) : undefined,
       maxPrice: maxPrice ? Number(maxPrice) : undefined,
