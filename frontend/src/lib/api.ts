@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const api = axios.create({ baseURL: '/api' });
+export const api = axios.create({ baseURL: import.meta.env.VITE_API_BASE_URL ?? '/api' });
 
 export interface ProductImage { id: number; url: string }
 export interface Product {

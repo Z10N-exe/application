@@ -5,14 +5,16 @@ import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, { cors: true });
-  app.enableCors();
+  const corsOrigin = process.env.CORS_ORIGIN ? { origin: process.env.CORS_ORIGIN } : undefined;
+  app.enableCors(corsOrigin);
   app.useGlobalPipes(
     new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true })
   );
 
-  await app.listen(3000);
+  const port = Number(process.env.PORT ?? 3000);
+  await app.listen(port);
   // eslint-disable-next-line no-console
-  console.log(`Backend API running on http://localhost:3000`);
+  console.log(`Backend API running on port ${port}`);
 }
 
 bootstrap();

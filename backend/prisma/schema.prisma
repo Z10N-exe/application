@@ -4,7 +4,7 @@ generator client {
 
 datasource db {
   provider = "sqlite"
-  url      = "file:./dev.db"
+  url      = env("DATABASE_URL")
 }
 
 model User {
@@ -34,4 +34,3 @@ model ProductImage {
   product   Product @relation(fields: [productId], references: [id])
   productId Int
 }
-
