@@ -6,7 +6,11 @@
   color-scheme: light dark;
 }
 
-body {
-  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+@layer base {
+  h1, h2, h3, .heading {
+    font-family: "Futura ND", "Helvetica Neue", Helvetica, Arial, "SF Pro Text", -apple-system, system-ui, ui-sans-serif;
+  }
+  body {
+    font-family: "Helvetica Neue", Helvetica, Arial, "SF Pro Text", -apple-system, system-ui, ui-sans-serif;
+  }
 }
-
