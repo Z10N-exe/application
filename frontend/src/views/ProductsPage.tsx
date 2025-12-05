@@ -11,7 +11,6 @@ export function ProductsPage() {
     queryFn: () => listProducts({
       search: filters.search || undefined,
       category: filters.category || undefined,
-      excludeCategory: 'Women',
       brand: filters.brand || undefined,
       minPrice: filters.minPrice ? Number(filters.minPrice) : undefined,
       maxPrice: filters.maxPrice ? Number(filters.maxPrice) : undefined,
