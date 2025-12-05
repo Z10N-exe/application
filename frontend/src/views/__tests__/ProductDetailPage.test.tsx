@@ -39,8 +39,8 @@ describe('ProductDetailPage interactions', () => {
     const sizeBtn = await screen.findByRole('button', { name: '7' });
     await userEvent.click(sizeBtn);
 
-    const addMobile = await screen.findByText(/Add to Bag/i);
-    await userEvent.click(addMobile);
+    const adds = screen.getAllByRole('button', { name: /Add to Bag/i });
+    await userEvent.click(adds[0]);
 
     const raw = localStorage.getItem('cart');
     expect(raw).toContain('1');
