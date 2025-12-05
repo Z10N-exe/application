@@ -34,7 +34,7 @@ export function SignInPage() {
     <div className="grid md:grid-cols-2 rounded-2xl overflow-hidden border bg-white">
       <div className="bg-black text-white p-10 flex flex-col justify-between min-h-[50vh] md:min-h-[80vh]">
         <div className="flex items-center justify-start">
-          <img src="/nike.webp" alt="Logo" className="h-9 object-contain" />
+          <img src="/nike.jpg" alt="Logo" className="h-9 object-contain" />
         </div>
         <div className="space-y-4">
           <div className="text-3xl md:text-4xl font-bold">Welcome Back</div>

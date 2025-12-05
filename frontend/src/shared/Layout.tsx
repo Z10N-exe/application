@@ -11,7 +11,7 @@ export function Layout() {
       {!isAuthPage && (
         <header className="flex items-center justify-between px-6 py-4 border-b">
           <NavLink to="/products" className="flex items-center gap-2">
-            <img src="/nike.webp" alt="Logo" className="h-5 w-auto" />
+            <img src="/nike.jpg" alt="Logo" className="h-5 w-auto" />
           </NavLink>
           {authed ? (
             <nav className="hidden md:flex items-center gap-6">
