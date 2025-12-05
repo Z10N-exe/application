@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { getProduct, listProducts } from '../lib/api.js';
 import { useState } from 'react';
 import { Heart, ChevronDown } from 'lucide-react';
+import { useCart } from '../shared/CartContext.js';
 
 export function ProductDetailPage() {
   const { id } = useParams();
@@ -11,6 +12,7 @@ export function ProductDetailPage() {
   const [fav, setFav] = useState(false);
   const [size, setSize] = useState<string | null>(null);
   const sizes = ['5','5.5','6','6.5','7','7.5','8','8.5','9','9.5','10','11','12'];
+  const { addItem } = useCart();
 
   const { data: suggestions } = useQuery({
     queryKey: ['suggestions', product?.category],
@@ -57,7 +59,7 @@ export function ProductDetailPage() {
           </div>
           <div className={product.stock > 0 ? 'text-green-600' : 'text-red-600'}>{product.stock > 0 ? 'In Stock' : 'Out of Stock'}</div>
           <div className="flex gap-3">
-            <button className="rounded-full px-5 py-3 bg-black text-white disabled:opacity-50" disabled={product.stock === 0}>Add to Bag</button>
+            <button className="rounded-full px-5 py-3 bg-black text-white disabled:opacity-50" disabled={product.stock === 0} onClick={() => addItem({ id: product.id })}>Add to Bag</button>
             <button className="rounded-full px-5 py-3 border">Size Guide</button>
           </div>
           <div className="divide-y border rounded">
