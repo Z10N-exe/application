@@ -23,8 +23,8 @@ export function ContactPage() {
       <div className="space-y-3">
         <h1 className="text-2xl md:text-3xl font-bold">Contact</h1>
         <p className="text-neutral-600">Questions about sizing, orders, or our products? Send us a message.</p>
-        <div className="text-sm">Email: support@example.com</div>
-        <div className="text-sm">Phone: +1 (555) 123-4567</div>
+        <div className="text-sm">Email: support@ZioNike.com</div>
+        <div className="text-sm">Phone: +234 814 1871232</div>
       </div>
       <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
         <div className="space-y-2">
