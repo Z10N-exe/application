@@ -19,9 +19,19 @@ function listImages() {
     .map((f) => `/${f}`);
 }
 
+function listWomenImages() {
+  const dir = path.join(getFrontendImagesDir(), 'women');
+  if (!fs.existsSync(dir)) return [];
+  const exts = new Set(['.jpg', '.jpeg', '.png', '.webp', '.gif', '.svg']);
+  return fs.readdirSync(dir)
+    .filter((f) => exts.has(path.extname(f).toLowerCase()))
+    .map((f) => `/women/${f}`);
+}
+
 async function main() {
   console.log('Seeding data from frontend/images...');
   const images = listImages();
+  const womenImages = listWomenImages();
 
   // Remove existing products and images to drop placeholders
   await prisma.productImage.deleteMany();
@@ -63,6 +73,23 @@ async function main() {
         images: {
           create: [{ url: img }],
         },
+      },
+    });
+  }
+
+  for (let i = 0; i < womenImages.length; i++) {
+    const img = womenImages[i];
+    const name = (names[i % names.length] + ` Women SE ${i + 1}`).replace('Nike ', 'Nike');
+    await prisma.product.create({
+      data: {
+        name,
+        description: `${name} designed specifically for women with supportive comfort and style.`,
+        price: rand(80, 220),
+        category: 'Women',
+        brand: 'Nike',
+        rating: Math.round((Math.random() * 5) * 10) / 10,
+        stock: Math.random() < 0.25 ? 0 : rand(5, 50),
+        images: { create: [{ url: img }] },
       },
     });
   }
