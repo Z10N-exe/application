@@ -39,13 +39,13 @@ export function ProductsPage() {
   return (
     <div className="space-y-6">
       <div className="grid md:grid-cols-3 gap-3">
-        <input className="border rounded px-3 py-2" placeholder="Search" value={filters.search} onChange={e => setFilters(f => ({...f, search: e.target.value}))} />
-        <input className="border rounded px-3 py-2" placeholder="Category" value={filters.category} onChange={e => setFilters(f => ({...f, category: e.target.value}))} />
-        <input className="border rounded px-3 py-2" placeholder="Brand" value={filters.brand} onChange={e => setFilters(f => ({...f, brand: e.target.value}))} />
-        <input className="border rounded px-3 py-2" placeholder="Min Price" value={filters.minPrice} onChange={e => setFilters(f => ({...f, minPrice: e.target.value}))} />
-        <input className="border rounded px-3 py-2" placeholder="Max Price" value={filters.maxPrice} onChange={e => setFilters(f => ({...f, maxPrice: e.target.value}))} />
-        <input className="border rounded px-3 py-2" placeholder="Min Rating" value={filters.minRating} onChange={e => setFilters(f => ({...f, minRating: e.target.value}))} />
-        <select className="border rounded px-3 py-2" value={filters.inStock} onChange={e => setFilters(f => ({...f, inStock: e.target.value}))} >
+        <input className="border rounded bg-white placeholder:text-neutral-400 px-3 py-2" placeholder="Search" value={filters.search} onChange={e => setFilters(f => ({...f, search: e.target.value}))} />
+        <input className="border rounded bg-white placeholder:text-neutral-400 px-3 py-2" placeholder="Category" value={filters.category} onChange={e => setFilters(f => ({...f, category: e.target.value}))} />
+        <input className="border rounded bg-white placeholder:text-neutral-400 px-3 py-2" placeholder="Brand" value={filters.brand} onChange={e => setFilters(f => ({...f, brand: e.target.value}))} />
+        <input className="border rounded bg-white placeholder:text-neutral-400 px-3 py-2" placeholder="Min Price" value={filters.minPrice} onChange={e => setFilters(f => ({...f, minPrice: e.target.value}))} />
+        <input className="border rounded bg-white placeholder:text-neutral-400 px-3 py-2" placeholder="Max Price" value={filters.maxPrice} onChange={e => setFilters(f => ({...f, maxPrice: e.target.value}))} />
+        <input className="border rounded bg-white placeholder:text-neutral-400 px-3 py-2" placeholder="Min Rating" value={filters.minRating} onChange={e => setFilters(f => ({...f, minRating: e.target.value}))} />
+        <select className="border rounded bg-white px-3 py-2" value={filters.inStock} onChange={e => setFilters(f => ({...f, inStock: e.target.value}))} >
           <option value="">Stock: Any</option>
           <option value="true">In Stock</option>
           <option value="false">Out of Stock</option>
