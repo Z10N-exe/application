@@ -39,7 +39,7 @@ export function ContactPage() {
         </div>
         <div className="space-y-2">
           <label className="text-sm">Message</label>
-          <textarea className="w-full rounded-md border border-neutral-200 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-black" rows={5} placeholder="Tell us more..." {...register('message')} />
+          <textarea className="w-full rounded-md border border-neutral-200 bg-white placeholder:text-neutral-400 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-black" rows={5} placeholder="Tell us more..." {...register('message')} />
           {errors.message && <p className="text-red-600 text-sm">{errors.message.message}</p>}
         </div>
         <Button type="submit" disabled={isSubmitting}>Send</Button>
