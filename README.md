@@ -92,9 +92,6 @@ Routing & assets:
   - `npm run build` produces `dist/` for Vercel
   - Responsive UI verified across breakpoints
 
-## Conventional Commits
-
-Use conventional commits (e.g., `feat: ...`, `fix: ...`, `style: ...`). Make the repo public for automated deploys.
 
 ## Testing
 
